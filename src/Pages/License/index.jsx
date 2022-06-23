@@ -81,7 +81,7 @@ const License = () => {
   return (
     <Nav>
       <Content>
-        <EnhancedTable headCells={headCells} data={licData} />
+        {/* <EnhancedTable headCells={headCells} data={licData} /> */}
         <Graph/>
       </Content>
     </Nav>

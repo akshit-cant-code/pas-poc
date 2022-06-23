@@ -20,7 +20,7 @@ const Login = () => {
 
   const onSubmit = () => {
     if (loginData.username === "admin" && loginData.password === "admin") {
-      navigate("/license");
+      navigate("/graphs");
     } else {
       alert("Invalid credentials");
     }

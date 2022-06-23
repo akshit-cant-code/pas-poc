@@ -131,7 +131,7 @@ export default function Nav({ children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["License"].map((text) => (
+          {["Graphs"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemText primary={text} />
