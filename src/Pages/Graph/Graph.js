@@ -563,19 +563,16 @@ var genFormatter = (series) => {
       <ReactEcharts option={line} />
       </div>
       <div>
-      <p>Single Stat</p>
+      <p></p><p></p>
         <SingleStat></SingleStat>
-        {/* <ReactEcharts option={singleStat} /> */}
       </div>
       <div>
-      <p>Gauge</p>
+      <p></p><p></p>
         <Gauge></Gauge>
-      {/* <ReactEcharts option={gauge} /> */}
       </div>
       <div>
-        <p>Pie Chart</p>
+      <p></p><p></p>
       <Pie></Pie>
-        {/* <ReactEcharts option={pie} /> */}
       </div>
       <div>
       <p>Discrete Panel</p>
