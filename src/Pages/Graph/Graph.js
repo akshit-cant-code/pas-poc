@@ -4,7 +4,8 @@ import "./Graph.css"
 import Pie from "./Pie"
 import Gauge from "./Gauge"
 import SingleStat from "./SingleStat"
- 
+import * as echarts from 'echarts';
+
 // Heatmap Data Feed section------------
 const hours = [
   1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30
@@ -17,6 +18,69 @@ const data = [[0, 9, 50], [0, 10, 50], [0, 20, 60], [0, 3, 70], [0, 4, 80], [0, 
     return [item[1], item[0], item[2] || '-'];
 });
 // end-----------
+
+// Discrete data section ----
+
+var disData = [];
+var dataCount = 200;
+var startTime = +new Date();
+var categories = ['M1', 'M2', 'M3'];
+var types = [
+  { name: 'Paused', color: '#edd70c' },
+  { name: 'Stopping', color: '#d45e15' },
+  { name: 'Running', color: '#75d874' },
+  { name: 'Pausing', color: '#edad0c' },
+  { name: 'Idle', color: '#0c93ed' },
+  { name: 'Disconnected', color: '#eb0c29' }
+];
+// Generate mock data
+categories.forEach(function (category, index) {
+  var baseTime = startTime;
+  for (var i = 0; i < dataCount; i++) {
+    var typeItem = types[Math.round(Math.random() * (types.length - 1))];
+    var duration = Math.round(Math.random() * 10000);
+    disData.push({
+      name: typeItem.name,
+      value: [index, baseTime, (baseTime += duration), duration],
+      itemStyle: {
+        normal: {
+          color: typeItem.color
+        }
+      }
+    });
+    baseTime += Math.round(Math.random() * 2000);
+  }
+});
+function renderItem(params, api) {
+  var categoryIndex = api.value(0);
+  var start = api.coord([api.value(1), categoryIndex]);
+  var end = api.coord([api.value(2), categoryIndex]);
+  var height = api.size([0, 1])[1] * 0.6;
+  var rectShape = echarts.graphic.clipRectByRect(
+    {
+      x: start[0],
+      y: start[1] - height / 2,
+      width: end[0] - start[0],
+      height: height
+    },
+    {
+      x: params.coordSys.x,
+      y: params.coordSys.y,
+      width: params.coordSys.width,
+      height: params.coordSys.height
+    }
+  );
+  return (
+    rectShape && {
+      type: 'rect',
+      transition: ['shape'],
+      shape: rectShape,
+      style: api.style()
+    }
+  );
+}
+
+//end
 
 const Graph=()=>
 {
@@ -341,7 +405,10 @@ var genFormatter = (series) => {
 
   const bar = {
     color: ['#3398DB', '#5528DB', '#ff00DB', '#3300DB', '#de3423'],
- 
+    title: {
+      text: 'Rejects By Machine',
+      left: 'center'
+    },
     xAxis : [
         {
             type : 'category',
@@ -411,9 +478,10 @@ var genFormatter = (series) => {
       top: 'center',
       formatter: "40",        
     },
-  title: {
-    text: 'Day output'
-  },
+    title: {
+      text: 'Hourly Output- Chip Operation By D_MachineID',
+      left: 'center'
+    },
   xAxis: {
       data: ['D1', 'D2', 'D3', 'D4']
     },
@@ -432,6 +500,10 @@ var genFormatter = (series) => {
   }
 
   const line = {
+    title: {
+      text: 'Production Progress -All',
+      left: 'center'
+    },
     xAxis: [{
       type: 'category',
       boundaryGap: false,
@@ -496,7 +568,52 @@ var genFormatter = (series) => {
   };  
 
   const discrete= {
-
+    tooltip: {
+      formatter: function (params) {
+        return params.marker + params.name + ': ' + (new Date(params.value[1])).toLocaleTimeString()  + ' to '+ (new Date(params.value[2])).toLocaleTimeString();
+      }
+    },
+    //color:['#edd70c','#d45e15','#75d874','#edad0c','#0c93ed','#eb0c29' ],
+    legend:{
+      show:true,
+      data:types
+    },
+    title: {
+      text: 'Machine State',
+      left: 'center'
+    },
+    grid: {
+      height: 150,
+     // width:500
+    },
+    xAxis: {
+      min: startTime,
+      scale: true,
+      axisLabel: {
+        formatter: function (val) {
+         return (new Date(val)).toLocaleTimeString(); 
+        }
+      }
+    },
+    yAxis: {
+      data: categories
+    },
+    series: [
+      {
+        type: 'custom',
+        renderItem: renderItem,
+        dimensions:['Paused','Stopping','Running','Pausing','Idle','Disconnected'],
+        itemStyle: {
+          opacity: 0.8,
+          show:true
+        },
+        encode: {
+          x: [1, 2],
+          y: 0
+        },
+        data: disData
+      }
+    ]
   };
 
   const lcd = {
