@@ -38,7 +38,7 @@ const Login = () => {
         }}
       >
         <h3 style={{ color: "#fff", paddingLeft: "1vh" }}>Entrust</h3>
-        <p style={{ color: "#fff", paddingLeft: "1vh" }}>License POC</p>
+        <p style={{ color: "#fff", paddingLeft: "1vh" }}>PAS POC</p>
       </span>
       <Content>
         <Grid item container justifyContent="center" alignItems="center">

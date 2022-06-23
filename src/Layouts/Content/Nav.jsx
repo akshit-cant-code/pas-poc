@@ -82,9 +82,9 @@ export default function Nav({ children }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" >
         <Toolbar variant="dense">
-          <IconButton
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -92,7 +92,7 @@ export default function Nav({ children }) {
             sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Grid container alignItems="center">
             <Grid item xs={11.5}>
               <Typography variant="label" noWrap component="div">
@@ -107,7 +107,7 @@ export default function Nav({ children }) {
           </Grid>
         </Toolbar>
       </AppBar>
-      <Drawer
+      {/* <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -139,7 +139,7 @@ export default function Nav({ children }) {
             </ListItem>
           ))}
         </List>
-      </Drawer>
+      </Drawer> */}
       <Main open={open}>
         <DrawerHeader />
         {children}
