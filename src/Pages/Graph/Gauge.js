@@ -1,8 +1,9 @@
 import React from "react";
-import ReactEcharts from "echarts-for-react";
 
+import ReactEcharts from "echarts-for-react";
 function Gauge() {
   const option = {
+
     series: [
       {
         type: 'gauge',
@@ -109,3 +110,4 @@ function Gauge() {
   return <ReactEcharts option={option} />;
 }
 export default Gauge;
+
