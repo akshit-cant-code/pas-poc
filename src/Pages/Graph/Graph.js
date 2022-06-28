@@ -14,15 +14,18 @@ import Discrete from './Discrete'
 import * as echarts from 'echarts';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+import DateRange from "./DateRange";
 
 
 
 
 
-const Graph = () => {
+
+const Graph = (props) => {
 
   const inputRef = useRef(null);
 const printGraph =()=>{
+  console.log(props)
   html2canvas(inputRef.current).then((canvas) => {
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF('p', 'pt', 'a4', false);
