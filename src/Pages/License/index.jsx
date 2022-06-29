@@ -3,7 +3,6 @@ import Content from "./../../Layouts/Content/index";
 import EnhancedTable from "./../../Components/EnhancedTable";
 import Graph from "./../../Pages/Graph/Graph"
 import DateRange from "../Graph/DateRange";
-
 import { useEffect, useState } from "react";
 
 const headCells = [
