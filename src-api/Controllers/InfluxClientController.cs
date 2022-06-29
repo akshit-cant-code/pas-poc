@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client;
+using System.Text;
 
 namespace InfluxApi.Controllers;
 
@@ -18,45 +19,54 @@ public class InfluxClientController : ControllerBase
     }
 
     [HttpGet(Name = "GetInfluxClient")]
-    public async Task<ScatterChart> Get()
+    public async Task<List<ScatterChart>> Get([FromQuery] string query)
     {
-      ScatterChart scatter = new ScatterChart();
-      scatter.machineName = "Machine1";
-      
-      const string token = "ExHMZbplDNEB2lBFJn7MpRPbkC6FcxAvqMLaLCD03j_Fke3swvmwPprSfAKsGlqVBQ5-zeQGml4W4imwE3jXMQ==";
-      const string org = "ashish.payal@globallogic.com";
+        List<ScatterChart> result = new List<ScatterChart>();
+        const string token = "ExHMZbplDNEB2lBFJn7MpRPbkC6FcxAvqMLaLCD03j_Fke3swvmwPprSfAKsGlqVBQ5-zeQGml4W4imwE3jXMQ==";
+        const string org = "ashish.payal@globallogic.com";
 
-      try
-      {
-         var influxDBClient = InfluxDBClientFactory.Create("https://us-east-1-1.aws.cloud2.influxdata.com", token);
-
-            var flux = @" import ""influxdata/influxdb/sample"" option v = {timeRangeStart: -10m, timeRangeStop: now()} sample.data(set: ""airSensor"") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[""_measurement""] == ""airSensors"") |> filter(fn: (r) => r[""_field""] == ""temperature"") ";
-            
+        try
+        {
+            var influxDBClient = InfluxDBClientFactory.Create("https://us-east-1-1.aws.cloud2.influxdata.com", token);
+           // query = @" import ""influxdata/influxdb/sample"" option v = {timeRangeStart: -1h, timeRangeStop: now()} sample.data(set: ""airSensor"") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[""_measurement""] == ""airSensors"") |> filter(fn: (r) => r[""_field""] == ""temperature"" or r[""_field""] == ""co"" or r[""_field""] == ""humidity"") ";
             var queryApi = influxDBClient.GetQueryApi();
 
-            var tables = await queryApi.QueryAsync(flux, org);
-            // foreach( var record in tables.SelectMany(table => table.Records)){
-            //     Console.WriteLine(record);
-            // }
-            tables.ForEach(table =>
-            {        
-                table.Records.ForEach(record =>
+            var sensors = await queryApi.QueryAsync<Sensors>(query, org);
+            var field = sensors.GroupBy(a => a._field).ToList();
+
+            foreach (var item in field)
+            {
+                ScatterChart chart = new ScatterChart();
+
+                chart.name = GetMachineName(item.Key);
+                chart.data = new List<List<Object>>();
+                foreach (var chartdata in item)
                 {
-                    // InfluxData influxdata = new InfluxData();
-                    // influxdata.timestamp = record.GetTimeInDateTime();
-                    // influxdata.value = record.GetValueByKey("_value").ToString();
-                    // scatter.data.Add(influxdata);
-                     Console.WriteLine($"{record.GetTime()}: {record.GetValueByKey("_value")}");
-                });
-            });
+                    List<Object> value = new List<Object>();
+                    value.Add(chartdata.time);
+                    value.Add(chartdata.Value);
+                    chart.data.Add(value);
+                }
+                result.Add(chart);
+            }
 
             influxDBClient.Dispose();
-      }
-      catch (Exception ex)
-      {     
-        throw ex;
-      }
-        return scatter;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        return result;
+    }
+    private string GetMachineName(string data)
+    {
+        if (data == "co")
+            return "Machine 1";
+        if (data == "humidity")
+            return "Machine 2";
+        if (data == "temperature")
+            return "Machine 3";
+        return "Machine1";
     }
 
 }
