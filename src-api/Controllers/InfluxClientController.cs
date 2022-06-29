@@ -28,7 +28,8 @@ public class InfluxClientController : ControllerBase
         try
         {
             var influxDBClient = InfluxDBClientFactory.Create("https://us-east-1-1.aws.cloud2.influxdata.com", token);
-           // query = @" import ""influxdata/influxdb/sample"" option v = {timeRangeStart: -1h, timeRangeStop: now()} sample.data(set: ""airSensor"") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[""_measurement""] == ""airSensors"") |> filter(fn: (r) => r[""_field""] == ""temperature"" or r[""_field""] == ""co"" or r[""_field""] == ""humidity"") ";
+            // query = @" import ""influxdata/influxdb/sample"" option v = {timeRangeStart: -1h, timeRangeStop: now()} sample.data(set: ""airSensor"") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[""_measurement""] == ""airSensors"") |> filter(fn: (r) => r[""_field""] == ""temperature"" or r[""_field""] == ""co"" or r[""_field""] == ""humidity"") ";
+            query = @" import ""influxdata/influxdb/sample"" option v = {timeRangeStart: -1d, timeRangeStop: now()} sample.data(set: ""usgs"") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[""_measurement""] == ""earthquake"") |> filter(fn: (r) => r[""_field""] == ""depth"" or r[""_field""] == ""nst"" or r[""_field""] == ""sig"" or r[""_field""] == ""gap"" or r[""_field""] == ""lat"") ";
             var queryApi = influxDBClient.GetQueryApi();
 
             var sensors = await queryApi.QueryAsync<Sensors>(query, org);
@@ -60,12 +61,16 @@ public class InfluxClientController : ControllerBase
     }
     private string GetMachineName(string data)
     {
-        if (data == "co")
+        if (data == "depth")
             return "Machine 1";
-        if (data == "humidity")
+        if (data == "nst")
             return "Machine 2";
-        if (data == "temperature")
+        if (data == "sig")
             return "Machine 3";
+        if (data == "gap")
+            return "Machine 4";
+        if (data == "lat")
+            return "Machine 5";
         return "Machine1";
     }
 
