@@ -1,24 +1,24 @@
 .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    /* height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* height: 100%;
     width: 100%; */
-  }
-  .flex-container > div {
-    width: 48%;  
-    height: 400px;
-    border: 1px solid black;
-    margin: 10px;
-  }
-  
-  .printBtn{
-    float: right;
-    padding: 10px 20px 10px 20px ;
-    border: 2px solid black;
-    border-radius: 12px;
-    background-color: rgb(75, 75, 235);
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    font-weight: bold ;
-  }
+}
+.flex-container > div {
+  width: 48%;
+  height: 400px;
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.printBtn {
+  margin-left: auto;
+  padding: 10px 20px 10px 20px;
+  border: 2px solid black;
+  border-radius: 12px;
+  background-color: rgb(75, 75, 235);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
