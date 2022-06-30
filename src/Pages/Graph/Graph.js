@@ -14,7 +14,7 @@ import Discrete from './Discrete'
 import * as echarts from 'echarts';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-
+import DataTable from './Table';
 
 
 
@@ -78,8 +78,8 @@ const printGraph =()=>{
           <LCD></LCD>
         </div>
         <div>
-          <p>Table</p>
-          <ReactEcharts option={table} />
+          <p  className='center'>Chip Perso TImes By D_MarchID</p>
+          <DataTable></DataTable>
         </div>
         
       </div>
