@@ -37,15 +37,15 @@ function Point(){
           top: '20%',
           height: '60%',
           widht: '10%',
-          right: '32%'
+          right: '44%'
         },
         legend: {
           icon: 'rect',
-          left: '68%',
+          left: '58%',
           right: '60%',
           top: '20%',
           orient: 'vertical',
-          data: ['Machine 1', 'Machine 2', 'Machine 3', 'Machine 4', 'Machine 5'],
+          data: ['Machine 1', 'Machine 2', 'Machine 3'],
           formatter: (name) => {
             var value = point.series.filter((row) => row.name === name)[0].data;
             var avg = 0,
