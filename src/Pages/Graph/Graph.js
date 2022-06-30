@@ -35,7 +35,7 @@ const Graph = (props) => {
     // }
 
     // const graphEle= document.querySelectorAll("div.flex-container > div")
-    const graphEle = document.querySelectorAll(".flex-container")
+    const graphEle = document.querySelectorAll(".flex-container, .flex-container-point")
     const pdf = new jsPDF('l', 'pt', 'a4', false);
     console.log("graphEle", graphEle.length);
 
@@ -65,18 +65,19 @@ const Graph = (props) => {
   return (
     // <div ref={inputRef}>
     <div>
-      <div className="flex-container">
+      <div className="flex-container-2" >
         <h3>Graphs</h3>
         <button className="printBtn" onClick={printGraph}>Export To PDF</button>
       </div>
+      <div className="flex-container-point">
+        <Point date={props}></Point>
+        </div>
       <div className="flex-container">
         <div>
           <HeatMap></HeatMap>
         </div>
 
-        <div>
-        <Point date={props}></Point>
-        </div>
+       
 
         <div>
           <Bar></Bar>
@@ -113,13 +114,17 @@ const Graph = (props) => {
         <div>
           <LCD></LCD>
         </div>
-
-        <div>
+        
+        
+      </div>
+     
+        
+<div className="flex-container">
+<div>
         <p  className='center'>Chip Perso TImes By D_MarchID</p>
           <Table></Table>
         </div>
-      </div>
-
+</div>
 
     </div>
   );

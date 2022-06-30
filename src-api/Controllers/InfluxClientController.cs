@@ -73,7 +73,7 @@ public class InfluxClientController : ControllerBase
         var orgID = "9f33fd00c2dfd5bc";
         var retentionPolicy = "RP_POC";
         var database = "POC";
-        var influxQuery = "select * from airSensors where time > now() - 1d group by *";
+        var influxQuery = query;// "select * from airSensors where time > now() - 2d group by *";
         var httpRequestMessage = new HttpRequestMessage(
            HttpMethod.Get,
            @"https://us-east-1-1.aws.cloud2.influxdata.com/query?orgID=" + orgID + "&db=" + database + "&retention_policy=" + retentionPolicy + "&q=" + influxQuery)

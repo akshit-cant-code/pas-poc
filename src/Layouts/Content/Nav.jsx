@@ -16,6 +16,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
 
@@ -94,15 +96,23 @@ export default function Nav({ children }) {
             <MenuIcon />
           </IconButton> */}
           <Grid container alignItems="center">
-            <Grid item xs={11.5}>
+            <Grid item xs={11}>
               <Typography variant="label" noWrap component="div">
                 Entrust
               </Typography>
             </Grid>
             <Grid item>
+              <Tooltip title="Admin">
+              <IconButton>
+                <AccountCircle sx={{ color: "#fff" }} />
+              </IconButton>
+              </Tooltip>
+              <Tooltip title="Logout">
               <IconButton onClick={() => navigate("/")}>
                 <LogoutIcon sx={{ color: "#fff" }} />
               </IconButton>
+              </Tooltip>
+              
             </Grid>
           </Grid>
         </Toolbar>

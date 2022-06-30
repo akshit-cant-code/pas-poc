@@ -13,7 +13,7 @@ function Point(props){
   //console.log("fetch",data);
  
   useEffect(() => {
-    fetch(`https://localhost:7239/InfluxClient?query=select * from airSensors where time> ${props.date.Range[0]} and time < ${props.date.Range[1]} - 1d group by *`)
+    fetch(`https://localhost:7239/InfluxClient?query=select * from airSensors where time>'${props.date.Range[0].toISOString()}' and time < '${props.date.Range[1].toISOString()}' group by *`)
       .then(results => results.json())
       .then(data => {
         setDataList(data);
@@ -40,12 +40,12 @@ function Point(props){
         grid: {
           top: '20%',
           height: '60%',
-          widht: '10%',
-          right: '44%'
+          widht: '70%',
+          right: '24%'
         },
         legend: {
           icon: 'rect',
-          left: '58%',
+          left: '78%',
           right: '60%',
           top: '20%',
           orient: 'vertical',

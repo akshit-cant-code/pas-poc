@@ -9,7 +9,7 @@ import "rsuite/dist/rsuite.min.css";
 function DateRange() {
 
   const [open, setOpen] = useState(false);
-  const [dateRange, setDateRange] = useState({});
+  const [dateRange, setDateRange] = useState([new Date('2022-06-30T10:30:00Z'), new Date('2022-06-30T10:35:00Z')]);
   const Ranges = [
     {
       label: 'last 5 minutes',
@@ -34,7 +34,7 @@ function DateRange() {
   ];
   return (
     <div>
-      <DateRangePicker format="yyyy-MM-dd HH:mm:ss" onChange={(range) => setDateRange(range)} ranges={Ranges} />
+      <DateRangePicker defaultValue={[new Date('2022-06-30T10:30:00Z'), new Date('2022-06-30T10:35:00Z')]} format="yyyy-MM-dd HH:mm:ss" onChange={(range) => setDateRange(range)} ranges={Ranges} />
       <Graph Range={dateRange}></Graph>
     </div>
   );
