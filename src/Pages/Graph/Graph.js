@@ -12,9 +12,9 @@ import StackedBar from './StackedBar';
 import Line from './Line'
 import Discrete from './Discrete'
 import * as echarts from 'echarts';
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
+
 import Table from './Table';
+import Export from './Export'
 
 
 
@@ -23,61 +23,22 @@ import Table from './Table';
 
 const Graph = (props) => {
 
-  console.log("props",props)
+  console.log("props", props)
 
-  const printGraph = () => {
-    //   html2canvas(inputRef.current).then((canvas) => {
-    //     const imgData = canvas.toDataURL("image/png");
-    //     const pdf = new jsPDF('p', 'pt', 'a4', false);
-    //     pdf.addImage(imgData, "JPEG", 0, 0,590,990, undefined, false);
-    //     pdf.save("Download_Graphs.pdf");
-    //   });
-    // }
-
-    // const graphEle= document.querySelectorAll("div.flex-container > div")
-    const graphEle = document.querySelectorAll(".flex-container, .flex-container-point")
-    const pdf = new jsPDF('l', 'pt', 'a4', false);
-    console.log("graphEle", graphEle.length);
-
-    graphEle.forEach((ele, i) => {
-      html2canvas(ele).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const imgProperties = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-        console.log("pdfHeight", pdfHeight, pdfWidth);
-        // pdf.addImage(imgData, "JPEG", 0, 0,590,840, undefined, false);
-        pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
-
-        const isLast = graphEle.length === i + 1;
-
-        isLast ? pdf.save("Download_Graphs.pdf") : pdf.addPage()
-
-      });
-    })
-  }
-
-
-  const table = {
-
-  };
 
   return (
     // <div ref={inputRef}>
     <div>
-      <div className="flex-container-2" >
-        <h3>Graphs</h3>
-        <button className="printBtn" onClick={printGraph}>Export To PDF</button>
-      </div>
+      <Export></Export>
       <div className="flex-container-point">
         <Point date={props}></Point>
-        </div>
+      </div>
       <div className="flex-container">
         <div>
           <HeatMap></HeatMap>
         </div>
 
-       
+
 
         <div>
           <Bar></Bar>
@@ -114,17 +75,17 @@ const Graph = (props) => {
         <div>
           <LCD></LCD>
         </div>
-        
-        
+
+
       </div>
-     
-        
-<div className="flex-container">
-<div>
-        <p  className='center'>Chip Perso TImes By D_MarchID</p>
+
+
+      <div className="flex-container">
+        <div>
+          <p className='center'>Chip Perso TImes By D_MarchID</p>
           <Table></Table>
         </div>
-</div>
+      </div>
 
     </div>
   );
