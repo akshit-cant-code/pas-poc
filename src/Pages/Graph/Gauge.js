@@ -7,11 +7,12 @@ function Gauge() {
     series: [
       {
         type: 'gauge',
-        center: ['50%', '60%'],
+        center: ['50%', '40%'],
         startAngle: 180,
         endAngle: 0,
         min: 0,
         max: 100,
+        radius: "50%",
         axisLine: {
           lineStyle: {
             width: 10,
@@ -32,7 +33,7 @@ function Gauge() {
           show: false
         },
         axisLabel: {
-          color: '#464646',
+          color: 'white',
           fontSize: 15,
           distance: -60,
           formatter: function (value) {
@@ -53,7 +54,8 @@ function Gauge() {
           fontSize: 30
         },
         detail: {
-          fontSize: 30,
+          fontSize: 20,
+          color:"white",
           offsetCenter: [0, '-10%'],
           valueAnimation: true,
           formatter: function (value) {
@@ -69,7 +71,8 @@ function Gauge() {
       },
       {
         type: 'gauge',
-        center: ['50%', '60%'],
+        center: ['50%', '40%'],
+        radius: "40%",
         startAngle: 180,
         endAngle: 0,
         min: 0,

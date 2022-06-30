@@ -5,7 +5,10 @@ function Line(){
     const line = {
         title: {
           text: 'Production Progress -All',
-          left: 'center'
+          left: 'center',
+          textStyle: {
+            color: 'white'
+            }
         },
         xAxis: [{
           type: 'category',
@@ -20,13 +23,16 @@ function Line(){
             onZero: true
           },
           axisLabel: {
-            color: "black"
+            color: "white"
           },
           onZero: true
         }],
         yAxis: {
           min: 0,
-          type: 'value'
+          type: 'value',
+          axisLabel:{
+            color:"white"
+          }
         },
         series: [
     

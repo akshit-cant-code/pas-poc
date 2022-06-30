@@ -35,7 +35,8 @@ const option = {
       subtext: '',
       left: 'center',
       textStyle: {
-        fontSize: 13
+        fontSize: 13,
+        color:"white"
       }
     },
     tooltip: {
@@ -45,6 +46,10 @@ const option = {
       orient: 'vertical',
       right: 'right',
       type: 'scroll',
+      textStyle: {
+        color:"white",
+        fontSize:"10px"
+      },
       formatter: name => {
         var value = dataList.filter(row => row.name === name)[0].value
         return name + '    ' + value;
