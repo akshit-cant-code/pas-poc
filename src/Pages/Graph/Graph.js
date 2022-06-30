@@ -14,7 +14,7 @@ import Discrete from './Discrete'
 import * as echarts from 'echarts';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-
+import Table from './Table';
 
 
 
@@ -120,7 +120,8 @@ const Graph = (props) => {
         </div>
 
         <div>
-          <ReactEcharts option={table} />
+        <p  className='center'>Chip Perso TImes By D_MarchID</p>
+          <Table></Table>
         </div>
       </div>
 
