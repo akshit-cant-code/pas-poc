@@ -73,7 +73,8 @@ function Gauge() {
       },
       {
         type: 'gauge',
-        center: ['50%', '60%'],
+        center: ['45%', '60%'],
+        radius:'45%',
         startAngle: 180,
         endAngle: 0,
         min: 0,

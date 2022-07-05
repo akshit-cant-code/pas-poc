@@ -28,10 +28,41 @@ function StackedBar(){
           right: "0%",
           top: 'center',
           formatter: "40",
+          data: ['Machine1', 'Machine2', 'Machine3'],
+
+          formatter: (name) => {
+
+            var value = stackedBar.series.filter((row) => row.name === name)[0].data;
+
+            var total = 0;
+
+            value.forEach((element) => {
+
+              total += element;
+
+            });
+
+            return (
+
+              name +
+
+              '   ' +
+
+              total
+
+            );
+
+          }
         },
         title: {
           text: 'Hourly Output- Chip Operation By D_MachineID',
           left: 'center'
+        },
+        grid: {
+          top: '20%',
+          height: '60%',
+          widht: '70%',
+          right: '24%'
         },
         backgroundColor:"#1E1C1B",
         xAxis: {

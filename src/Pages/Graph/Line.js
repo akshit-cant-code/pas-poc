@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
-import moment from "moment";
+
 
 function Line(){
     const line = {
@@ -9,14 +9,9 @@ function Line(){
           left: 'center'
         },
         xAxis: [{
-          type: "category",
-          axisLabel: {
-            formatter: function(value){
-                    return moment.unix(value).format('D/MM');;
-            }},
-          data: [ 1568160683.5443,1525168800000,1656312429,1656226029,1656139629,1656053229,1655707629,1655102829,1609439400,
-            1525168800000],
-         
+         type: "category",
+          data: [ '10/4','10/7','10/10','10/13','10/16','10/19','10/22','10/25','10/28'],
+          boundaryGap: false,
     
           axisLine: {
             lineStyle: {
@@ -44,9 +39,11 @@ function Line(){
             color: "yellow",
             width: 5,
             lineStyle:{
+
               width:6
+
             },
-            
+          
             data: [0, 1000,1000,1000,2000, 3000, 5000,5000,5200,7000,7200],
     
           }
