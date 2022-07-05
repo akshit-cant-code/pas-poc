@@ -82,7 +82,7 @@ const Graph = (props) => {
 
       <div className="flex-container">
         <div>
-          <p className='center'>Chip Perso TImes By D_MarchID</p>
+         
           <Table></Table>
         </div>
       </div>

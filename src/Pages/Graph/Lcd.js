@@ -36,8 +36,9 @@ function LCD(){
             showBackground: true,
           },
         ],
+        backgroundColor:"#1E1C1B"
       };
-    return <ReactEcharts option={lcd} />;
+    return <ReactEcharts theme={'dark'} option={lcd} />;
 }
 
 export default LCD;

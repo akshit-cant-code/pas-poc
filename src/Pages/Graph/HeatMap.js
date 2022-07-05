@@ -28,6 +28,7 @@ function HeatMap(){
         tooltip: {
           position: "top"
         },
+        backgroundColor:"#1E1C1B",
         title: {
           top: 10,
           left: 'center',
@@ -63,7 +64,7 @@ function HeatMap(){
           left: "center",
           bottom: "15%",
           inRange: {
-            color: ["#010B13", "#343C19", "#676D20", "#999D26", "#CCCE2D", "#FFFF33"]
+            color: ["#3E3301","#635203","#806A02", "#9A7F03", "#BA9904", "#D6B104", "#E8BF03", "#FDD104"]
           }
         },
         series: [
@@ -73,7 +74,7 @@ function HeatMap(){
           }
         ]
       };
-      return <ReactEcharts option={heatMap} />;
+      return <ReactEcharts theme={'dark'} option={heatMap} />;
 
 }
 export default HeatMap;

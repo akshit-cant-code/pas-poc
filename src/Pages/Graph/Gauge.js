@@ -3,7 +3,11 @@ import React from "react";
 import ReactEcharts from "echarts-for-react";
 function Gauge() {
   const option = {
-
+    title: {
+      top: 10,
+      left: 'center',
+      text: 'Availability'
+    },
     series: [
       {
         type: 'gauge',
@@ -105,8 +109,9 @@ function Gauge() {
           }
         ]
       }
-    ]
+    ],
+    backgroundColor:"#1E1C1B"
   };
-  return <ReactEcharts option={option} />;
+  return <ReactEcharts theme={'dark'} option={option} />;
 }
 export default Gauge;

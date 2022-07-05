@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
+import moment from "moment";
 
 function Line(){
     const line = {
@@ -8,8 +9,14 @@ function Line(){
           left: 'center'
         },
         xAxis: [{
-          type: 'category',
-          boundaryGap: false,
+          type: "category",
+          axisLabel: {
+            formatter: function(value){
+                    return moment.unix(value).format('D/MM');;
+            }},
+          data: [ 1568160683.5443,1525168800000,1656312429,1656226029,1656139629,1656053229,1655707629,1655102829,1609439400,
+            1525168800000],
+         
     
           axisLine: {
             lineStyle: {
@@ -20,7 +27,7 @@ function Line(){
             onZero: true
           },
           axisLabel: {
-            color: "black"
+            color: "white"
           },
           onZero: true
         }],
@@ -36,29 +43,19 @@ function Line(){
             smooth: true,
             color: "yellow",
             width: 5,
-            markLine: {
-              symbol: ['none', 'none'],
-              label: { show: false },
-              data: [
-                { xAxis: 0 },
-                { xAxis: 5000 },
-                { xAxis: 7500 },
-                { xAxis: 1000 },
-    
-              ],
-              lineStyle: {
-                type: 'solid',
-                color: 'black'
-              }
+            lineStyle:{
+              width:6
             },
-            data: [0, 5000, 7500, 1000],
+            
+            data: [0, 1000,1000,1000,2000, 3000, 5000,5000,5200,7000,7200],
     
           }
-        ]
+        ],
+        backgroundColor:"#1E1C1B"
     
       };
     
-    return <ReactEcharts option={line}/>
+    return <ReactEcharts theme={'dark'} option={line}/>
 }
 
 export default Line;

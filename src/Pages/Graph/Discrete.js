@@ -112,9 +112,10 @@ function Discrete(){
             },
             data: disData
           }
-        ]
+        ],
+        backgroundColor:"#1E1C1B"
       };
     
-    return <ReactEcharts option={discrete}></ReactEcharts>
+    return <ReactEcharts theme={'dark'} option={discrete}></ReactEcharts>
 }
 export default Discrete;

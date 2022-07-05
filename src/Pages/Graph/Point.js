@@ -84,11 +84,12 @@ function Point(props){
             );
           }
         },
-        series: dataList
+        series: dataList,
+        backgroundColor:"#1E1C1B"
       };
     
 
-    return <ReactEcharts option={point} />;
+    return <ReactEcharts theme={'dark'} option={point} />;
 
 }
 export default Point;

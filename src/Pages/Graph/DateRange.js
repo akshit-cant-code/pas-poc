@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import DateRangePicker from 'rsuite/DateRangePicker';
+import {CustomProvider,DateRangePicker} from 'rsuite';
 import { addDays, addHours, addMinutes, addMonths } from 'date-fns'
 import Graph from "./Graph";
 import "rsuite/dist/rsuite.min.css";
@@ -33,10 +33,12 @@ function DateRange() {
     }
   ];
   return (
+    <CustomProvider theme="dark">
     <div>
       <DateRangePicker defaultValue={[new Date('2022-06-30T10:30:00Z'), new Date('2022-06-30T10:35:00Z')]} format="yyyy-MM-dd HH:mm:ss" onChange={(range) => setDateRange(range)} ranges={Ranges} />
       <Graph Range={dateRange}></Graph>
     </div>
+    </CustomProvider>
   );
 }
 

@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import { StyledEngineProvider } from '@mui/material/styles';
 import clsx from 'clsx';
+import "./Graph.css"; 
 
 function isOverflown(element) {
     return (
@@ -141,27 +142,29 @@ function isOverflown(element) {
     value: PropTypes.string,
   };
 const columns = [
-  { field: 'id', headerName: 'D_machineId', width: 100,renderCell: renderCellExpand,
+  { field: 'id', headerName: 'D_machineId', width: 100,renderCell: renderCellExpand,headerClassName:'header-background-color'
 },
-  { field: 'Percentile', headerName: '95Percentile', width: 100 },
-  { field: 'max', headerName: 'Max', width: 100 },
+  { field: 'Percentile', headerName: '95Percentile', width: 100,headerClassName:'header-background-color' },
+  { field: 'max', headerName: 'Max', width: 100,headerClassName:'header-background-color' },
   {
     field: 'min',
     headerName: 'Min',
     type: 'number',
     width: 100,
+    headerClassName:'header-background-color'
   },
   {
     field: 'mean',
     headerName: 'Mean',
-    width: 130,
-    cellClassName: (params) => {
+    width: 179,
+    headerClassName:'header-background-color'
+    // cellClassName: (params) => {
         
-        return clsx('super-app-positive', {
-        //   negative: params.row.min < 0,
-          positive: params.row.min > 0
-        });
-      }
+    //     return clsx('super-app-positive', {
+    //     //   negative: params.row.min < 0,
+    //       positive: params.row.min > 0
+    //     });
+    //   }
   }
 ];
 
@@ -179,8 +182,10 @@ const rows = [
 
 export default function Table() {
   return (
-    <div style={{ height: 350, width: '100%' }}>
+    <div style={{  height: 320, width: '100%' }}>
+       <p className='center'>Chip Perso TImes By D_MachID</p>
       <DataGrid
+      
         rows={rows}
         columns={columns}
         pageSize={5}

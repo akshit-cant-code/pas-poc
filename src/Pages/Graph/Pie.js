@@ -67,9 +67,10 @@ const option = {
                 }
           }
         }
-    ]
+    ],
+    backgroundColor:"#1E1C1B"
   };  
-return <ReactEcharts option={option} />;
+return <ReactEcharts theme={'dark'} option={option} />;
 } 
 export default Pie;
 
