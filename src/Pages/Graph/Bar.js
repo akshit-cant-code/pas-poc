@@ -2,7 +2,6 @@ import React from "react";
 import ReactEcharts from "echarts-for-react"; 
 
 function Bar(){
-  var i=0;
 //for references : https://stackoverflow.com/questions/52771079/echarts-display-corresponding-legend-for-each-bar
     const bar = {
         color: ['#3398DB', '#5528DB', '#ff00DB', '#3300DB', '#de3423'],
@@ -26,23 +25,30 @@ function Bar(){
             },
           }
         ],
+        grid: {
+          top: '20%',
+          height: '60%',
+          widht: '70%',
+          right: '24%'
+        },
         legend: {
           data: ['Machine1', 'Machine2', 'Machine3', 'Machine4', 'Machine5', 'Machine6'],
           orient: "vertical",
           right: "0%",
-          top: "25%",
+          top: "24%",
           formatter: (name) => {
             var value = bar.series.filter((row) => row.name === name)[0].data;
             var val;
+           
             value.forEach((element) => {
-              val = value;
+             if(element!=null){
+              val=element;
+             }
             });
 
             return (
 
-              name + ' ' +
-
-              val[i++]
+              name + ' ' + val
 
             );
           }
@@ -84,8 +90,7 @@ function Bar(){
             stack: 'stack',
             data: [, , , , , 1000, ,]
           }
-        ],
-        backgroundColor:"#1E1C1B"
+        ]
       };
       return <ReactEcharts theme={'dark'} option={bar} />;
     

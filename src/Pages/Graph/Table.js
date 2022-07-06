@@ -185,7 +185,7 @@ export default function Table() {
     <div style={{  height: 320, width: '100%' }}>
        <p className='center'>Chip Perso TImes By D_MachID</p>
       <DataGrid
-      
+     
         rows={rows}
         columns={columns}
         pageSize={5}
@@ -194,7 +194,8 @@ export default function Table() {
         rowsPerPageOptions={[]}
         sx={{
         
-        
+          backgroundColor:'#1E1C1B',
+          color:'white'
           }}
       />
     </div>

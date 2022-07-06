@@ -110,8 +110,7 @@ function Gauge() {
           }
         ]
       }
-    ],
-    backgroundColor:"#1E1C1B"
+    ]
   };
   return <ReactEcharts theme={'dark'} option={option} />;
 }

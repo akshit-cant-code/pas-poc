@@ -35,8 +35,7 @@ function LCD(){
             data: [18203, 23489, 29034, 34970, 31744, 30230],
             showBackground: true,
           },
-        ],
-        backgroundColor:"#1E1C1B"
+        ]
       };
     return <ReactEcharts theme={'dark'} option={lcd} />;
 }

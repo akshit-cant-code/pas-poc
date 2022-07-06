@@ -28,7 +28,6 @@ function HeatMap(){
         tooltip: {
           position: "top"
         },
-        backgroundColor:"#1E1C1B",
         title: {
           top: 10,
           left: 'center',

@@ -64,7 +64,6 @@ function StackedBar(){
           widht: '70%',
           right: '24%'
         },
-        backgroundColor:"#1E1C1B",
         xAxis: {
           type: "category",
           axisLabel: {

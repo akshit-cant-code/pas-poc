@@ -84,8 +84,7 @@ function Point(props){
             );
           }
         },
-        series: dataList,
-        backgroundColor:"#1E1C1B"
+        series: dataList
       };
     
 
