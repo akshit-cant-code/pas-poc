@@ -7,13 +7,10 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import { StyledEngineProvider } from '@mui/material/styles';
 import clsx from 'clsx';
-
 import ProgressBar from '../../Components/Progress';
 import { useState, useEffect } from "react";
-import { COLUMNS_DIMENSION_PROPERTIES } from '@mui/x-data-grid/hooks/features/columns/gridColumnsUtils';
 
 
->>>>>>> Stashed changes
 
 function isOverflown(element) {
     return (
@@ -148,40 +145,36 @@ function isOverflown(element) {
     value: PropTypes.string,
   };
 const columns = [
-  { field: 'id', headerName: 'D_machineId', width: 100,renderCell: renderCellExpand,headerClassName:'header-background-color'
+  { field: 'id', headerName: 'D_machineId', width: 100,renderCell: renderCellExpand,
 },
-  { field: 'Percentile', headerName: '95Percentile', width: 100,headerClassName:'header-background-color' },
-  { field: 'max', headerName: 'Max', width: 100,headerClassName:'header-background-color' },
+  { field: 'Percentile', headerName: '95Percentile', width: 100 , renderCell: (params) =>  <ProgressBar progress={Number(params.rows.Percentile)} ><p>10</p></ProgressBar>},
+  { field: 'max', headerName: 'Max', width: 100 },
   {
-    field: '3',
+    field: 'min',
     headerName: 'Min',
     type: 'number',
     width: 100,
-    headerClassName:'header-background-color'
   },
   {
-    field: '4',
+    field: 'mean',
     headerName: 'Mean',
-    width: 179,
-    headerClassName:'header-background-color'
-    // cellClassName: (params) => {
+    width: 130,
+    cellClassName: (params) => {
         
-    //     return clsx('super-app-positive', {
-    //     //   negative: params.row.min < 0,
-    //       positive: params.row.min > 0
-    //     });
-    //   }
+        return clsx('super-app-positive', {
+        //   negative: params.row.min < 0,
+          positive: params.row.min > 0
+        });
+      }
   }
 ];
 
-var column =[]
-
-var rows = [
-  { id: "Mandatory zero administration ability",Percentile: 65, max: '18.8s', min: '43.2s', mean: "12.23s" },
-  { id: "Machine3", Percentile: 14.8,max: '16.8s', min: '432.2s', mean: "13.3s" },
-  { id: "Machine4", Percentile: 53.8,max: '15.8s', min: '23.2s', mean: "16.3s" },
-  { id: "Machine5",Percentile: 70, max: '14.8s', min: '13.2s', mean: "32.2s" },
-  { id: "Machine6", Percentile: 16.8,max: '13.8s', min: "12.2s", mean: "15.0s" },
+const rows = [
+  { id: "Mandatory zero administration ability",Percentile: '12.8s', max: '18.8s', min: '43.2s', mean: "12.23s" },
+  { id: "Machine3", Percentile: '14.8s',max: '16.8s', min: '432.2s', mean: "13.3s" },
+  { id: "Machine4", Percentile: '18.8s',max: '15.8s', min: '23.2s', mean: "16.3s" },
+  { id: "Machine5",Percentile: '17.8s', max: '14.8s', min: '13.2s', mean: "32.2s" },
+  { id: "Machine6", Percentile: '16.8s',max: '13.8s', min: "12.2s", mean: "15.0s" },
  
 ];
 
@@ -199,38 +192,18 @@ export default function Table() {
           });
       })    
   }, []);
- var length = String(column.length)
- var temp = dataList.dataList.seriesData.columns
- var values = dataList.dataList.seriesData.values
- if(column!=null){
-  for(var i =0;i<24;i=i+1){
-    column[i] = {field: i, headerName: temp[i], width: 100}
-  }
-}
   return (
-<<<<<<< Updated upstream
-    <div style={{  height: 320, width: '100%' }}>
-       <p className='center'>Chip Perso TImes By D_MachID</p>
+    <div style={{ height: 350, width: '100%' }}>
       <DataGrid
-     
-        rows={rows}
-        columns={columns}
-=======
-      <div style={{ height: 350, width: '100%' }}>
-      <DataGrid
-        rows={values}
-        columns={column}
->>>>>>> Stashed changes
+        rows={dataList.seiesData.columns}
+        columns={dataList.seiesData.values}
         pageSize={5}
         hideFooter
         showCellRightBorder
         rowsPerPageOptions={[]}
-        getRowId={(row) => row[0]}
-
         sx={{
         
-          backgroundColor:'#1E1C1B',
-          color:'white'
+        
           }}
       />
     </div>

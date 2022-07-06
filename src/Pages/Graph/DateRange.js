@@ -36,6 +36,7 @@ function DateRange() {
     <CustomProvider theme="dark">
     <div>
       <DateRangePicker defaultValue={[new Date('2022-06-30T10:30:00Z'), new Date('2022-06-30T10:35:00Z')]} format="yyyy-MM-dd HH:mm:ss" onChange={(range) => setDateRange(range)} ranges={Ranges} />
+      <percentile/>
       <Graph Range={dateRange}></Graph>
     </div>
     </CustomProvider>

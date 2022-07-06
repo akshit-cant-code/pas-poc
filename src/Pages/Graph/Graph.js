@@ -20,7 +20,6 @@ import Export from './Export'
 
 
 
-
 const Graph = (props) => {
 
   console.log("props", props)
@@ -28,7 +27,9 @@ const Graph = (props) => {
 
   return (
     // <div ref={inputRef}>
+  
     <div>
+         
       <Export></Export>
       <div className="flex-container-point">
         <Point date={props}></Point>

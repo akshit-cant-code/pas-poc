@@ -34,6 +34,33 @@
   border: 1px solid black;
   margin: 10px;
 }
+<<<<<<< Updated upstream
 .header-background-color{
   color: #40A3D4;
+=======
+
+#myProgress {
+  width: 100px;
+  background-color: #ddd;
+}
+
+#myBar{
+  height: 15px;
+    margin:5px;
+    background: 
+      linear-gradient(-45deg,
+        rgba(255, 255, 255, 0.15) 105%, 
+         rgba(255, 255, 255, 0.15) 145%, 
+        rgba(255, 255, 255, 0.15) 175%) 
+      left/30px 30px repeat-x,
+      linear-gradient(to right, red 0%, yellow 35px, green 70px) left/var(--p,100%) fixed,
+      lightgray;
+}
+
+#myBar::before {
+  width: 34%;
+  height: 20px;
+  background-image: linear-gradient(to right, red , yellow);
+
+>>>>>>> Stashed changes
 }
