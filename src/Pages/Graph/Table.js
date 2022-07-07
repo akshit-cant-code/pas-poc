@@ -184,7 +184,103 @@ var rows = [
  
 ];
 
-
+var dataList = [
+  {
+    "name": null,
+    "type": "scatter",
+    "symbolSize": 5,
+    "data": [],
+    "seriesData": [
+      {
+        "name": "earthquake",
+        "tags": null,
+        "columns": [
+          "time",
+          "cdi",
+          "code",
+          "depth",
+          "detail",
+          "dmin",
+          "felt",
+          "gap",
+          "id",
+          "ids",
+          "lat",
+          "lon",
+          "mag",
+          "magType",
+          "net",
+          "nst",
+          "place",
+          "rms",
+          "sig",
+          "sources",
+          "status",
+          "title",
+          "tsunami",
+          "types",
+          "url"
+        ],
+        "values": [
+          [
+            "2022-06-30T04:31:13.21Z",
+            null,
+            "40294040",
+            90.62,
+            "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40294040.geojson",
+            0.06568,
+            null,
+            77,
+            "ci40294040",
+            ",ci40294040,",
+            33.2965,
+            -116.7278333,
+            0.49,
+            "ml",
+            "ci",
+            14,
+            "7km NNE of Lake Henshaw, CA",
+            0.18,
+            4,
+            ",ci,",
+            "automatic",
+            "M 0.5 - 7km NNE of Lake Henshaw, CA",
+            0,
+            ",nearby-cities,origin,phase-data,scitech-link,",
+            "https://earthquake.usgs.gov/earthquakes/eventpage/ci40294040"
+          ],
+          [
+            "2022-06-30T04:33:02.337Z",
+            null,
+            "00841972",
+            30,
+            "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00841972.geojson",
+            0.406,
+            null,
+            134.23,
+            "nn00841972",
+            ",nn00841972,",
+            39.3962,
+            -118.097,
+            1.5,
+            "ml",
+            "nn",
+            13,
+            "53 km E of Fallon Station, Nevada",
+            0.1452,
+            35,
+            ",nn,",
+            "automatic",
+            "M 1.5 - 53 km E of Fallon Station, Nevada",
+            0,
+            ",origin,phase-data,",
+            "https://earthquake.usgs.gov/earthquakes/eventpage/nn00841972"
+          ]
+        ]
+      }
+    ]
+  }
+]
 
 export default function Table() {
   const [dataList, setState] = useState({});
@@ -196,17 +292,25 @@ export default function Table() {
               isLoaded: true,
               dataList: result
           });
-      }) 
-
+      })    
   }, []);
- var length = String(column.length)
  var temp = dataList.dataList[0].seriesData[0].columns
  var values = dataList.dataList[0].seriesData[0].values
  if(column!=null){
   for(var i =0;i<temp.length;i=i+1){
+    if(i==3){
+      column[i] = {field: i, headerName: temp[i], width: 100,renderCell: (params) =>  { return  <ProgressBar progress={Number(params.row[3])} ></ProgressBar>}}
+    }
+   else if(i==7){
+      column[i] = {field: i, headerName: temp[i], width: 100,renderCell: (params) =>  {return  <ProgressBar progress={Number(params.row[7])} ></ProgressBar>}}
+    }
+    else{
     column[i] = {field: i, headerName: temp[i], width: 100}
+    }
   }
 }
+console.log(dataList[0].seriesData[0].values)
+
   return (
 
       <div style={{ height: 350, width: '100%' }}>

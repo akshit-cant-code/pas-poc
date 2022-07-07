@@ -19,8 +19,9 @@ const ProgressBartemp = (props) =>  {
 
   return (
       <LinearProgress {...props}
-        classes={{ root: classes.root, bar: classes.bar }}
-      />
+        classes={{ root: classes.root, bar: classes.bar }}>
+        <p>{progress}</p>
+      </LinearProgress>
   );
 }
 
