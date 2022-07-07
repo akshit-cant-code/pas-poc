@@ -275,7 +275,169 @@ var dataList = [
             0,
             ",origin,phase-data,",
             "https://earthquake.usgs.gov/earthquakes/eventpage/nn00841972"
-          ]
+          ],
+            [
+              "2022-09-30T04:31:13.21Z",
+              null,
+              "40294540",
+              50.62,
+              "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40294040.geojson",
+              0.06568,
+              null,
+              33,
+              "ci40294040",
+              ",ci40294040,",
+              33.2965,
+              -116.7278333,
+              0.49,
+              "ml",
+              "ci",
+              14,
+              "7km NNE of Lake Henshaw, CA",
+              0.18,
+              4,
+              ",ci,",
+              "automatic",
+              "M 0.5 - 7km NNE of Lake Henshaw, CA",
+              0,
+              ",nearby-cities,origin,phase-data,scitech-link,",
+              "https://earthquake.usgs.gov/earthquakes/eventpage/ci40294049"
+            ],
+              [
+                "2022-06-30T04:34:13.21Z",
+                null,
+                "40294840",
+                19.62,
+                "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40294040.geojson",
+                0.06568,
+                null,
+                55,
+                "ci40294040",
+                ",ci40294040,",
+                34.2965,
+                -116.7278333,
+                0.49,
+                "ml",
+                "ci",
+                14,
+                "7km NNE of Lake Henshaw, CA",
+                0.18,
+                4,
+                ",ci,",
+                "automatic",
+                "M 0.5 - 7km NNE of Lake Henshaw, CA",
+                0,
+                ",nearby-cities,origin,phase-data,scitech-link,",
+                "https://earthquake.usgs.gov/earthquakes/eventpage/ci40294043"
+              ],
+                [
+                  "2022-07-30T04:31:13.21Z",
+                  null,
+                  "402666040",
+                  30.62,
+                  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40294040.geojson",
+                  0.06568,
+                  null,
+                  73,
+                  "ci40294040",
+                  ",ci40294040,",
+                  33.2965,
+                  -116.7278333,
+                  0.49,
+                  "ml",
+                  "ci",
+                  14,
+                  "7km NNE of Lake Henshaw, CA",
+                  0.18,
+                  4,
+                  ",ci,",
+                  "automatic",
+                  "M 0.5 - 7km NNE of Lake Henshaw, CA",
+                  0,
+                  ",nearby-cities,origin,phase-data,scitech-link,",
+                  "https://earthquake.usgs.gov/earthquakes/eventpage/ci40299040"
+                ],
+                  [
+                    "2022-06-30T04:31:53.21Z",
+                    null,
+                    "40294046",
+                    40.62,
+                    "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40294040.geojson",
+                    0.06568,
+                    null,
+                    17,
+                    "ci40294040",
+                    ",ci40294040,",
+                    33.2965,
+                    -116.7278333,
+                    0.49,
+                    "ml",
+                    "ci",
+                    14,
+                    "7km NNE of Lake Henshaw, CA",
+                    0.18,
+                    4,
+                    ",ci,",
+                    "automatic",
+                    "M 0.5 - 7km NNE of Lake Henshaw, CA",
+                    0,
+                    ",nearby-cities,origin,phase-data,scitech-link,",
+                    "https://earthquake.usgs.gov/earthquakes/eventpage/ci40294940"
+                  ],
+                    [
+                      "2022-06-30T04:01:13.21Z",
+                      null,
+                      "40244040",
+                      90.62,
+                      "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40294040.geojson",
+                      0.06568,
+                      null,
+                      47,
+                      "ci40294040",
+                      ",ci40294040,",
+                      33.2965,
+                      -116.7278333,
+                      0.49,
+                      "ml",
+                      "ci",
+                      14,
+                      "7km NNE of Lake Henshaw, CA",
+                      0.18,
+                      4,
+                      ",ci,",
+                      "automatic",
+                      "M 0.5 - 7km NNE of Lake Henshaw, CA",
+                      0,
+                      ",nearby-cities,origin,phase-data,scitech-link,",
+                      "https://earthquake.usgs.gov/earthquakes/eventpage/ci40294040"
+                    ],
+                      [
+                        "2022-06-30T04:21:13.21Z",
+                        null,
+                        "40294040",
+                        90.62,
+                        "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40294040.geojson",
+                        0.06568,
+                        null,
+                        77,
+                        "ci40294040",
+                        ",ci40294040,",
+                        33.2965,
+                        -116.7278333,
+                        0.49,
+                        "ml",
+                        "ci",
+                        14,
+                        "7km NNE of Lake Henshaw, CA",
+                        0.18,
+                        4,
+                        ",ci,",
+                        "automatic",
+                        "M 0.5 - 7km NNE of Lake Henshaw, CA",
+                        0,
+                        ",nearby-cities,origin,phase-data,scitech-link,",
+                        "https://earthquake.usgs.gov/earthquakes/eventpage/ci40294840"
+                      ]
         ]
       }
     ]
@@ -294,22 +456,20 @@ export default function Table() {
           });
       })    
   }, []);
- var temp = dataList.dataList[0].seriesData[0].columns
- var values = dataList.dataList[0].seriesData[0].values
- if(column!=null){
-  for(var i =0;i<temp.length;i=i+1){
-    if(i==3){
-      column[i] = {field: i, headerName: temp[i], width: 100,renderCell: (params) =>  { return  <ProgressBar progress={Number(params.row[3])} ></ProgressBar>}}
+  var temp = dataList[0].seriesData[0].columns
+  var values = dataList[0].seriesData[0].values
+    for(var i =0;i<=24;i=i+1){
+      
+      if(i==3){
+        column[i] = {field: i, headerName: temp[i], width: 300,renderCell: (params) =>  { return  <ProgressBar progress={Number(params.row[3])} ></ProgressBar>}}
+      }
+    else if(i==7){
+        column[i] = {field: i, headerName: temp[i], width: 300,renderCell: (params) =>  {return  <ProgressBar progress={Number(params.row[7])} ></ProgressBar>}}
+      }
+      else{
+      column[i] = {field: i, headerName: temp[i], width: 100,renderCell: renderCellExpand}}
+      
     }
-   else if(i==7){
-      column[i] = {field: i, headerName: temp[i], width: 100,renderCell: (params) =>  {return  <ProgressBar progress={Number(params.row[7])} ></ProgressBar>}}
-    }
-    else{
-    column[i] = {field: i, headerName: temp[i], width: 100}
-    }
-  }
-}
-console.log(dataList[0].seriesData[0].values)
 
   return (
 

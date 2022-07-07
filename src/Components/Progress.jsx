@@ -9,7 +9,8 @@ function ProgressBar(props){
     return (<div>
       <div id="myProgress">
     <div id="myBar" style={{width : progress}}></div>
-  </div> <p>{progress}</p>
+  </div> 
+  <p>{progress}</p>
   </div>); 
 }
 
