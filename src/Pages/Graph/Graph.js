@@ -81,7 +81,7 @@ const Graph = (props) => {
       </div>
 
 
-      <div className="flex-container">
+      <div className="flex-container-point">
         <div>
          
           <Table></Table>

@@ -196,13 +196,14 @@ export default function Table() {
               isLoaded: true,
               dataList: result
           });
-      })    
+      }) 
+
   }, []);
  var length = String(column.length)
- var temp = dataList.dataList.seriesData.columns
- var values = dataList.dataList.seriesData.values
+ var temp = dataList.dataList[0].seriesData[0].columns
+ var values = dataList.dataList[0].seriesData[0].values
  if(column!=null){
-  for(var i =0;i<24;i=i+1){
+  for(var i =0;i<temp.length;i=i+1){
     column[i] = {field: i, headerName: temp[i], width: 100}
   }
 }
@@ -212,7 +213,7 @@ export default function Table() {
       <DataGrid
         rows={values}
         columns={column}
-        pageSize={5}
+        pageSize={7}
         hideFooter
         showCellRightBorder
         rowsPerPageOptions={[]}
