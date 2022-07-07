@@ -34,11 +34,9 @@
   border: 1px solid black;
   margin: 10px;
 }
-<<<<<<< Updated upstream
 .header-background-color{
   color: #40A3D4;
-=======
-
+}
 #myProgress {
   width: 100px;
   background-color: #ddd;
@@ -62,5 +60,4 @@
   height: 20px;
   background-image: linear-gradient(to right, red , yellow);
 
->>>>>>> Stashed changes
 }

@@ -13,7 +13,6 @@ import { useState, useEffect } from "react";
 import { COLUMNS_DIMENSION_PROPERTIES } from '@mui/x-data-grid/hooks/features/columns/gridColumnsUtils';
 
 
->>>>>>> Stashed changes
 
 function isOverflown(element) {
     return (
@@ -208,19 +207,11 @@ export default function Table() {
   }
 }
   return (
-<<<<<<< Updated upstream
-    <div style={{  height: 320, width: '100%' }}>
-       <p className='center'>Chip Perso TImes By D_MachID</p>
-      <DataGrid
-     
-        rows={rows}
-        columns={columns}
-=======
+
       <div style={{ height: 350, width: '100%' }}>
       <DataGrid
         rows={values}
         columns={column}
->>>>>>> Stashed changes
         pageSize={5}
         hideFooter
         showCellRightBorder
