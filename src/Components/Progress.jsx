@@ -1,6 +1,6 @@
 import * as React from "react";
-import { LinearProgress } from "@mui/material";
-import {makeStyles} from "@mui/styles";
+// import { LinearProgress } from "@mui/material";
+// import {makeStyles} from "@mui/styles";
 //const {LinearProgress, makeStyles} = MaterialUI
 
 
@@ -10,7 +10,7 @@ function ProgressBar(props){
       <div id="myProgress">
     <div id="myBar" style={{width : progress}}></div>
   </div> 
-  <p>{progress}</p>
+  <span style={{padding: '10px'}}>{progress}</span>
   </div>); 
 }
 

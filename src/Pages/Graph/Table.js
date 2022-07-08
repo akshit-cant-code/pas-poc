@@ -146,43 +146,8 @@ function isOverflown(element) {
      */
     value: PropTypes.string,
   };
-const columns = [
-  { field: 'id', headerName: 'D_machineId', width: 100,renderCell: renderCellExpand,headerClassName:'header-background-color'
-},
-  { field: 'Percentile', headerName: '95Percentile', width: 100,headerClassName:'header-background-color' },
-  { field: 'max', headerName: 'Max', width: 100,headerClassName:'header-background-color' },
-  {
-    field: '3',
-    headerName: 'Min',
-    type: 'number',
-    width: 100,
-    headerClassName:'header-background-color'
-  },
-  {
-    field: '4',
-    headerName: 'Mean',
-    width: 179,
-    headerClassName:'header-background-color'
-    // cellClassName: (params) => {
-        
-    //     return clsx('super-app-positive', {
-    //     //   negative: params.row.min < 0,
-    //       positive: params.row.min > 0
-    //     });
-    //   }
-  }
-];
 
 var column =[]
-
-var rows = [
-  { id: "Mandatory zero administration ability",Percentile: 65, max: '18.8s', min: '43.2s', mean: "12.23s" },
-  { id: "Machine3", Percentile: 14.8,max: '16.8s', min: '432.2s', mean: "13.3s" },
-  { id: "Machine4", Percentile: 53.8,max: '15.8s', min: '23.2s', mean: "16.3s" },
-  { id: "Machine5",Percentile: 70, max: '14.8s', min: '13.2s', mean: "32.2s" },
-  { id: "Machine6", Percentile: 16.8,max: '13.8s', min: "12.2s", mean: "15.0s" },
- 
-];
 
 var dataList = [
   {
@@ -257,7 +222,7 @@ var dataList = [
             "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00841972.geojson",
             0.406,
             null,
-            134.23,
+            92.23,
             "nn00841972",
             ",nn00841972,",
             39.3962,
@@ -445,26 +410,26 @@ var dataList = [
 ]
 
 export default function Table() {
-  const [dataList, setState] = useState({});
-  useEffect(() => {
-    fetch("https://localhost:7239/InfluxClient?query=select * from earthquake").then((res) => res.json())
-    .then(
-      (result) => {
-        setState({
-              isLoaded: true,
-              dataList: result
-          });
-      })    
-  }, []);
+  // const [dataList, setState] = useState({});
+  // useEffect(() => {
+  //   fetch("https://localhost:7239/InfluxClient?query=select * from earthquake").then((res) => res.json())
+  //   .then(
+  //     (result) => {
+  //       setState({
+  //             isLoaded: true,
+  //             dataList: result
+  //         });
+  //     })    
+  // }, []);
   var temp = dataList[0].seriesData[0].columns
   var values = dataList[0].seriesData[0].values
-    for(var i =0;i<=24;i=i+1){
+    for(var i =0; i<temp.length; i++){
       
       if(i==3){
-        column[i] = {field: i, headerName: temp[i], width: 300,renderCell: (params) =>  { return  <ProgressBar progress={Number(params.row[3])} ></ProgressBar>}}
+        column[i] = {field: i, headerName: temp[i], width: 200,renderCell: (params) =>  { return  <ProgressBar progress={Number(params.row[3])} ></ProgressBar>}}
       }
     else if(i==7){
-        column[i] = {field: i, headerName: temp[i], width: 300,renderCell: (params) =>  {return  <ProgressBar progress={Number(params.row[7])} ></ProgressBar>}}
+        column[i] = {field: i, headerName: temp[i], width: 200,renderCell: (params) =>  {return  <ProgressBar progress={Number(params.row[7])} ></ProgressBar>}}
       }
       else{
       column[i] = {field: i, headerName: temp[i], width: 100,renderCell: renderCellExpand}}

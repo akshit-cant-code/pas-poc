@@ -38,6 +38,7 @@
   color: #40A3D4;
 }
 #myProgress {
+  display: inline-block;
   width: 100px;
   background-color: #ddd;
 }
@@ -60,4 +61,13 @@
   height: 20px;
   background-image: linear-gradient(to right, red , yellow);
 
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  text-transform: capitalize;
+  color: rgb(110, 159, 255);
+}
+
+.MuiDataGrid-sortIcon {
+  color: rgb(110, 159, 255);
 }
