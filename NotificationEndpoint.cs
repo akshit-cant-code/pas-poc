@@ -10,6 +10,7 @@
         public string? authMethod { get; set; } = "none";
         public string? method { get; set; } = "POST";
         public string? url { get; set; }
+        public string? email { get; set; }
     }
     public class EndpointsListWrapper
     {

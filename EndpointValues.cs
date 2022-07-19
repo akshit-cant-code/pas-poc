@@ -11,5 +11,6 @@
         public DateTime _time { get; set; }
         public double humidity { get; set; }
         public string sensor_id { get; set; }
+        public string _notification_endpoint_name { get; set; }
     }
 }

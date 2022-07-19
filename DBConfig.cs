@@ -12,8 +12,8 @@
         public string orgID { get; set; }
         public Query query { get; set; }
         public string status { get; set; } = "active";
-        public string every { get; set; } = "10m";
-        public string offset { get; set; } = "0s";
+        public string every { get; set; } 
+        public string offset { get; set; } 
         public string statusMessageTemplate { get; set; }
         public List<Threshold> thresholds { get; set; }
         public string type { get; set; } = "threshold";
@@ -24,6 +24,10 @@
         public string? orgID { get; set; }
         public string? query { get; set; }
         public string? type { get; set; }
+        public string? every { get; set; }
+        public string? offset { get; set; }
+        public string? thresholdType { get; set; }
+        public decimal? thresholdValue { get; set; }
         public string? postType { get; set; }
     }
 
@@ -61,7 +65,7 @@
         }
         public string editMode { get; set; } = "builder";
         public string name { get; set; }
-        public string text { get; set; } = @"from(bucket: ""POC"")  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)  |> filter(fn: (r) => r[""_measurement""] == ""airSensors"")  |> filter(fn: (r) => r[""_field""] == ""humidity"")  |> aggregateWindow(every: 1m, fn: max, createEmpty: false)  |> yield(name: ""max"")";
+        public string text { get; set; }
         public BuilderConfig builderConfig { get; set; }
     }
 
@@ -83,7 +87,7 @@
         public bool allValues { get; set; }
         public string level { get; set; }
         public string type { get; set; }
-        public int value { get; set; }
+        public decimal? value { get; set; }
     }
 
 

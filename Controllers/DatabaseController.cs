@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using InfluxApi.Store;
+using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,11 @@ namespace InfluxApi.Controllers
     public class DatabaseController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public DatabaseController(IHttpClientFactory httpClientFactory)
+        private readonly IMailAddressStore _mailStore;
+        public DatabaseController(IHttpClientFactory httpClientFactory,IMailAddressStore mailStore)
         {
             _httpClientFactory = httpClientFactory;
+            _mailStore = mailStore;
         }
         [HttpPost]
         [Route("Check")]
@@ -24,9 +27,12 @@ namespace InfluxApi.Controllers
         {
             DBConfig postData = new DBConfig();
             postData.name = configValues.name;
+            postData.every = configValues.every;
+            postData.offset = configValues.offset;
+            postData.query.text = configValues.query;
             postData.orgID = "79652bcd0afaf280";
             postData.thresholds.Add(
-                new Threshold() { allValues = false, type = "greater", value = 35, level = configValues.type });
+                new Threshold() { allValues = false, type = configValues.thresholdType, value = configValues.thresholdValue, level = configValues.type });
             postData.query.builderConfig.buckets.Add("POC");
             Tag postTag1 = new Tag { key = "_measurement", values = new List<string> { "airSensors" }, aggregateFunctionType = "filter" };
             Tag postTag2 = new Tag { key = "_field", values = new List<string> { "humidity" }, aggregateFunctionType = "filter" };
@@ -50,6 +56,9 @@ namespace InfluxApi.Controllers
             postData.name = configValues.name;
             postData.orgID = "79652bcd0afaf280";
             postData.url = configValues.url;
+            var emailList = configValues.email.Split(";");
+
+            _mailStore.Add(configValues.name, emailList.ToList());
 
             var json = JsonConvert.SerializeObject(postData);
 
@@ -61,16 +70,17 @@ namespace InfluxApi.Controllers
 
         [HttpPost]
         [Route("NotificationRule")]
-        public async Task<IActionResult> CreateNotificationRule([FromBody] NotificationRule configValues)
+        public async Task<IActionResult> CreateNotificationRule([FromBody] NotificationRuleModel configValues)
         {
             NotificationRule postData = new NotificationRule();
             postData.name = configValues.name;
-            postData.endpointID = configValues.endpointID;
+            postData.endpointID = configValues.endPointID;
             postData.orgID = "79652bcd0afaf280";
             postData.type = "http";
-            postData.statusRules.Add(new StatusRule { currentLevel = "CRIT" });
+            postData.statusRules.Add(new StatusRule { currentLevel = configValues.conditionType });
             postData.status = "active";
-            postData.every = "10m";
+            postData.every = configValues.every;
+            postData.offset = configValues.offset;
             //
             var json = JsonConvert.SerializeObject(postData);
             if (HttpPost(json, @"http://localhost:8086/api/v2/notificationRules").Result)
@@ -161,15 +171,20 @@ namespace InfluxApi.Controllers
         [Route("Mail")]
         public void Mail([FromBody] EndpointValues values)
         {
-            if (values._check_name == "CRIT")
-                SendEmail(values._check_name, values.humidity);
+            if (values._level.ToLower() == "crit")
+                SendEmail(values._level, values.humidity,_mailStore.GetMailAddressList(values._notification_endpoint_name));
         }
 
-        private void SendEmail(string level, double? humidity)
+        private void SendEmail(string level, double? humidity,List<string> mailAddressList)
         {
+            InternetAddressList list = new InternetAddressList();
+            foreach(var address in mailAddressList)
+            {
+                list.Add(MailboxAddress.Parse(address));
+            }
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("himanshu.saxena@globallogic.com"));
-            email.To.Add(MailboxAddress.Parse("ashish.payal@globallogic.com"));
+            email.To.AddRange(list);
             email.Subject = "Endpoint Test || PAS POC";
             email.Body = new TextPart(TextFormat.Plain) { Text = $"This is test email coming from PAS POC team for Http Endpoint testing with level : {level} for humidity : {humidity}" };
 
