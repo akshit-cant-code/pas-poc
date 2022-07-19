@@ -17,6 +17,28 @@
         public string statusMessageTemplate { get; set; }
         public List<Threshold> thresholds { get; set; }
         public string type { get; set; } = "threshold";
+        
+    }
+
+    public class CheckList
+    {
+        public CheckList()
+        {
+            thresholds = new List<Threshold>();
+        }
+        public string name { get; set; }
+        public string type { get; set; }
+        public string status { get; set; }
+        public List<Threshold> thresholds { get; set; }
+    }
+
+    public class CheckListWrapper
+    {
+        public CheckListWrapper()
+        {
+            checks = new List<CheckList>();
+        }
+        public  List<CheckList> checks { get; set; }
     }
     public class ApiModel
     {

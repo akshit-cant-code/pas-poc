@@ -21,4 +21,9 @@
     {
         public string? currentLevel { get; set; }
     }
+
+    public class RulesWrapper
+    {
+        public List<NotificationRule> notificationRules { get; set; }
+    }
 }

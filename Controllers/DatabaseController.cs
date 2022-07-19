@@ -128,7 +128,7 @@ namespace InfluxApi.Controllers
         }
         [HttpGet]
         [Route("EndpointsList")]
-        public async Task<IActionResult> HttpGet()
+        public async Task<IActionResult> GetEndpoints()
         {
             var orgID = "79652bcd0afaf280";
             EndpointsListWrapper model = new EndpointsListWrapper();
@@ -156,6 +156,88 @@ namespace InfluxApi.Controllers
                      await httpResponseMessage.Content.ReadAsStreamAsync();
 
                     model = await System.Text.Json.JsonSerializer.DeserializeAsync<EndpointsListWrapper>(contentStream);
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+            return Ok(model);
+
+        }
+
+        [HttpGet]
+        [Route("RulesList")]
+        public async Task<IActionResult> GetRules()
+        {
+            var orgID = "79652bcd0afaf280";
+            RulesWrapper model = new RulesWrapper();
+            try
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                        HttpMethod.Get,
+                        @"http://localhost:8086/api/v2/notificationRules?orgID=" + orgID)
+                {
+                    Headers =
+            {
+
+                { "Authorization", "Token _ABiC-uU5Nd0CQ9WlwKN_c2S7esianEwVAq8FZ4iC74EbnMF8ucgh39XdwX-T-XiZBbPpQQESSfpBrwIrsMXfg==" }
+            }
+
+                };
+
+
+                var httpClient = _httpClientFactory.CreateClient();
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    using var contentStream =
+                     await httpResponseMessage.Content.ReadAsStreamAsync();
+
+                    model = await System.Text.Json.JsonSerializer.DeserializeAsync<RulesWrapper>(contentStream);
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+            return Ok(model);
+
+        }
+
+        [HttpGet]
+        [Route("ChecksList")]
+        public async Task<IActionResult> GetChecks()
+        {
+            var orgID = "79652bcd0afaf280";
+            CheckListWrapper model = new CheckListWrapper();
+            try
+            {
+                var httpRequestMessage = new HttpRequestMessage(
+                        HttpMethod.Get,
+                        @"http://localhost:8086/api/v2/checks?orgID=" + orgID)
+                {
+                    Headers =
+            {
+
+                { "Authorization", "Token _ABiC-uU5Nd0CQ9WlwKN_c2S7esianEwVAq8FZ4iC74EbnMF8ucgh39XdwX-T-XiZBbPpQQESSfpBrwIrsMXfg==" }
+            }
+
+                };
+
+
+                var httpClient = _httpClientFactory.CreateClient();
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    using var contentStream =
+                     await httpResponseMessage.Content.ReadAsStreamAsync();
+
+                    model = await System.Text.Json.JsonSerializer.DeserializeAsync<CheckListWrapper>(contentStream);
                 }
             }
             catch (Exception)
