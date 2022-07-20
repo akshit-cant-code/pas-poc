@@ -30,7 +30,7 @@ namespace InfluxApi.Controllers
             postData.every = configValues.every;
             postData.offset = configValues.offset;
             postData.query.text = configValues.query;
-            postData.orgID = "79652bcd0afaf280";
+            postData.orgID = "1faf8523c7348c45";
             postData.thresholds.Add(
                 new Threshold() { allValues = false, type = configValues.thresholdType, value = configValues.thresholdValue, level = configValues.type });
             postData.query.builderConfig.buckets.Add("POC");
@@ -54,7 +54,7 @@ namespace InfluxApi.Controllers
         {
             NotificationEndpoint postData = new NotificationEndpoint();
             postData.name = configValues.name;
-            postData.orgID = "79652bcd0afaf280";
+            postData.orgID = "1faf8523c7348c45";
             postData.url = configValues.url;
             var emailList = configValues.email.Split(";");
 
@@ -75,7 +75,7 @@ namespace InfluxApi.Controllers
             NotificationRule postData = new NotificationRule();
             postData.name = configValues.name;
             postData.endpointID = configValues.endPointID;
-            postData.orgID = "79652bcd0afaf280";
+            postData.orgID = "1faf8523c7348c45";
             postData.type = "http";
             postData.statusRules.Add(new StatusRule { currentLevel = configValues.conditionType });
             postData.status = "active";
@@ -103,7 +103,7 @@ namespace InfluxApi.Controllers
                     Headers =
             {
 
-                { "Authorization", "Token _ABiC-uU5Nd0CQ9WlwKN_c2S7esianEwVAq8FZ4iC74EbnMF8ucgh39XdwX-T-XiZBbPpQQESSfpBrwIrsMXfg==" }
+                { "Authorization", "Token 183j5EYhmgebr3lzVRHzk4-wehpTynY4Nf9MdWbjasBdLLkldvVjlDbqWTW1CgOKGnogD-reudV_YjbxODCqLQ==" }
             },
                     Content = new StringContent(json.ToString(), Encoding.UTF8, "application/json")
 
@@ -130,7 +130,7 @@ namespace InfluxApi.Controllers
         [Route("EndpointsList")]
         public async Task<IActionResult> GetEndpoints()
         {
-            var orgID = "79652bcd0afaf280";
+            var orgID = "1faf8523c7348c45";
             EndpointsListWrapper model = new EndpointsListWrapper();
             try
             {
@@ -141,7 +141,7 @@ namespace InfluxApi.Controllers
                     Headers =
             {
 
-                { "Authorization", "Token _ABiC-uU5Nd0CQ9WlwKN_c2S7esianEwVAq8FZ4iC74EbnMF8ucgh39XdwX-T-XiZBbPpQQESSfpBrwIrsMXfg==" }
+                { "Authorization", "Token 183j5EYhmgebr3lzVRHzk4-wehpTynY4Nf9MdWbjasBdLLkldvVjlDbqWTW1CgOKGnogD-reudV_YjbxODCqLQ==" }
             }
 
                 };
@@ -171,7 +171,7 @@ namespace InfluxApi.Controllers
         [Route("RulesList")]
         public async Task<IActionResult> GetRules()
         {
-            var orgID = "79652bcd0afaf280";
+            var orgID = "1faf8523c7348c45";
             RulesWrapper model = new RulesWrapper();
             try
             {
@@ -182,7 +182,7 @@ namespace InfluxApi.Controllers
                     Headers =
             {
 
-                { "Authorization", "Token _ABiC-uU5Nd0CQ9WlwKN_c2S7esianEwVAq8FZ4iC74EbnMF8ucgh39XdwX-T-XiZBbPpQQESSfpBrwIrsMXfg==" }
+                { "Authorization", "Token 183j5EYhmgebr3lzVRHzk4-wehpTynY4Nf9MdWbjasBdLLkldvVjlDbqWTW1CgOKGnogD-reudV_YjbxODCqLQ==" }
             }
 
                 };
@@ -212,7 +212,7 @@ namespace InfluxApi.Controllers
         [Route("ChecksList")]
         public async Task<IActionResult> GetChecks()
         {
-            var orgID = "79652bcd0afaf280";
+            var orgID = "1faf8523c7348c45";
             CheckListWrapper model = new CheckListWrapper();
             try
             {
@@ -223,7 +223,7 @@ namespace InfluxApi.Controllers
                     Headers =
             {
 
-                { "Authorization", "Token _ABiC-uU5Nd0CQ9WlwKN_c2S7esianEwVAq8FZ4iC74EbnMF8ucgh39XdwX-T-XiZBbPpQQESSfpBrwIrsMXfg==" }
+                { "Authorization", "Token 183j5EYhmgebr3lzVRHzk4-wehpTynY4Nf9MdWbjasBdLLkldvVjlDbqWTW1CgOKGnogD-reudV_YjbxODCqLQ==" }
             }
 
                 };
@@ -258,24 +258,36 @@ namespace InfluxApi.Controllers
         }
 
         private void SendEmail(string level, double? humidity,List<string> mailAddressList)
-        {
-            InternetAddressList list = new InternetAddressList();
-            foreach(var address in mailAddressList)
-            {
-                list.Add(MailboxAddress.Parse(address));
-            }
-            var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("himanshu.saxena@globallogic.com"));
-            email.To.AddRange(list);
-            email.Subject = "Endpoint Test || PAS POC";
-            email.Body = new TextPart(TextFormat.Plain) { Text = $"This is test email coming from PAS POC team for Http Endpoint testing with level : {level} for humidity : {humidity}" };
+		{
+            if (mailAddressList != null && mailAddressList.Count > 0)
+			{
+                try
+                {
+                    InternetAddressList list = new InternetAddressList();
+                    foreach (var address in mailAddressList)
+                    {
+                        list.Add(MailboxAddress.Parse(address));
+                    }
+                    var email = new MimeMessage();
+                    email.From.Add(MailboxAddress.Parse("himanshu.saxena@globallogic.com"));
+                    email.To.AddRange(list);
+                    email.Subject = "Endpoint Test || PAS POC";
+                    email.Body = new TextPart(TextFormat.Plain) { Text = $"This is test email coming from PAS POC team for Http Endpoint testing with level : {level} for humidity : {humidity}" };
 
-            // send email
-            using var smtp = new SmtpClient();
-            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("himanshu.saxena@globallogic.com", "Real@123");
-            smtp.Send(email);
-            smtp.Disconnect(true);
+                    // send email
+                    using var smtp = new SmtpClient();
+                    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                    smtp.Authenticate("himanshu.saxena@globallogic.com", "Real@123");
+                    smtp.Send(email);
+                    smtp.Disconnect(true);
+
+                }
+                catch (Exception)
+                {
+                }
+            }
+           
+            
         }
     }
 }
