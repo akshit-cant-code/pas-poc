@@ -1,10 +1,28 @@
+using FluentValidation.AspNetCore;
 using InfluxApi.Store;
+using JsonCrudWebAPI.Infrastructure.Contracts.Database;
+using JsonCrudWebAPI.Infrastructure.Contracts.License;
+using JsonCrudWebAPI.Infrastructure.Implementations.Database;
+using JsonCrudWebAPI.Infrastructure.Implementations.License;
+using JsonCrudWebAPI.Services.Contracts.Database;
+using JsonCrudWebAPI.Services.Contracts.License;
+using JsonCrudWebAPI.Services.Implementations.Database;
+using JsonCrudWebAPI.Services.Implementations.License;
+using JsonCrudWebAPI.Services.Mapper;
+using JsonCrudWebAPI.Services.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services.AddControllers();
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LicenseValidator>());
+builder.Services.AddSingleton<ILicenseRepository, LicenseRepository>();
+builder.Services.AddScoped<ILicenseService, LicenseService>();
+builder.Services.AddScoped<IDatabaseRepository, DatabaseRespository>();
+builder.Services.AddScoped<IDatabaseService, DatabaseService>();
+builder.Services.AddAutoMapper(typeof(LicenseMapper));
+
 builder.Services.AddSingleton<IMailAddressStore, MailAddressStore>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
