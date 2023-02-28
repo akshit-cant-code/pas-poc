@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\My Individual Projects\JsonFileCrud\JsonFileCrud.WebAPI\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-02-21T07:58:04.2987225Z;True|2023-02-21T13:27:18.7582671+05:30;True|2023-02-21T12:07:48.8057190+05:30;False|2023-02-21T12:00:43.3353750+05:30;False|2023-02-21T11:58:10.2666023+05:30;False|2023-02-21T11:56:34.3068746+05:30;True|2023-02-20T12:28:28.5447142+05:30;True|2023-02-17T12:05:23.9796409+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
